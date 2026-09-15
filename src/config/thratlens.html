@@ -1,0 +1,234 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ThreatLens AI — Implementation Summary</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1f2328;
+    background: #ffffff;
+    padding: 32px 16px 48px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 700; color: #1f2328; margin-bottom: 4px; }
+  .subtitle { color: #57606a; font-size: 13px; margin-bottom: 28px; }
+  h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #57606a; margin: 28px 0 12px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+  h3 { font-size: 14px; font-weight: 600; color: #1f2328; margin-bottom: 4px; }
+  p { color: #444d56; margin-bottom: 8px; font-size: 13px; }
+  code { font-family: "Fira Code", "Consolas", monospace; font-size: 12px; background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 4px; padding: 1px 5px; }
+  pre { background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 16px; font-size: 12px; overflow-x: auto; font-family: monospace; line-height: 1.5; margin-bottom: 12px; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; margin-right: 4px; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+  .badge-red { background: #fee2e2; color: #b91c1c; }
+  .badge-orange { background: #ffedd5; color: #c2410c; }
+  .badge-green { background: #d1fae5; color: #065f46; }
+  .badge-purple { background: #ede9fe; color: #6d28d9; }
+  .badge-gray { background: #f1f5f9; color: #475569; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 16px; background: #f7f8fa; }
+  .card-title { font-size: 12px; font-weight: 700; color: #57606a; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+  .page-item { display: flex; gap: 10px; margin-bottom: 14px; align-items: flex-start; }
+  .page-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 8px; }
+  th { text-align: left; font-size: 11px; font-weight: 600; color: #57606a; text-transform: uppercase; letter-spacing: .05em; padding: 6px 10px; border-bottom: 1px solid #e5e7eb; background: #f7f8fa; }
+  td { padding: 7px 10px; border-bottom: 1px solid #f0f2f4; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .route-method { font-weight: 700; font-family: monospace; }
+  .get { color: #059669; }
+  .patch { color: #d97706; }
+  .path { font-family: monospace; font-size: 11px; color: #3b82d4; }
+  .stack-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .stack-label { font-size: 12px; color: #57606a; width: 80px; flex-shrink: 0; }
+  .cmd-block { background: #111827; color: #d1fae5; border-radius: 6px; padding: 10px 14px; font-family: monospace; font-size: 12px; line-height: 1.7; margin-bottom: 8px; }
+  .cmd-comment { color: #6b7280; }
+  .section-note { font-size: 12px; color: #57606a; background: #f0f6ff; border-left: 3px solid #3b82d4; padding: 8px 12px; border-radius: 0 6px 6px 0; margin-bottom: 12px; }
+  .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e5e7eb; text-align: center; font-size: 12px; color: #57606a; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
+    <div style="width:40px;height:40px;background:#1d4ed8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px">🛡</div>
+    <div>
+      <h1>ThreatLens AI</h1>
+      <div class="subtitle">Full-stack cybersecurity threat intelligence dashboard — implementation complete</div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px">
+    <span class="badge badge-blue">React 18 + TypeScript</span>
+    <span class="badge badge-green">Express API</span>
+    <span class="badge badge-purple">Recharts</span>
+    <span class="badge badge-orange">Tailwind CSS</span>
+    <span class="badge badge-gray">MITRE ATT&amp;CK</span>
+    <span class="badge badge-red">AI Scoring</span>
+  </div>
+
+  
+  <h2>Files Created</h2>
+  <div class="grid2" style="margin-bottom:16px">
+    <div class="card">
+      <div class="card-title">Backend (14 files)</div>
+      <pre style="background:transparent;border:none;padding:0;margin:0;font-size:11px">backend/
+  package.json · tsconfig.json
+  src/types.ts
+  src/index.ts
+  src/data/seed.ts          (20 alerts, 3 incidents)
+  src/routes/alerts.ts
+  src/routes/incidents.ts
+  src/routes/stats.ts
+  src/routes/mitre.ts</pre>
+    </div>
+    <div class="card">
+      <div class="card-title">Frontend (25 files)</div>
+      <pre style="background:transparent;border:none;padding:0;margin:0;font-size:11px">frontend/
+  package.json · tsconfig*.json
+  vite.config.ts · tailwind.config.js
+  src/types/index.ts
+  src/api/index.ts
+  src/utils/index.ts
+  components/ui/  (5 components)
+  components/layout/ (Sidebar, AppShell)
+  components/charts/ (Trend, Donut)
+  components/mitre/  (Heatmap)
+  pages/            (7 pages)</pre>
+    </div>
+  </div>
+
+  
+  <h2>UI Pages Implemented</h2>
+
+  <div class="page-item">
+    <div class="page-icon" style="background:#dbeafe">📊</div>
+    <div>
+      <h3>Dashboard <code>/</code></h3>
+      <p>KPI cards (total alerts, critical count, active incidents, avg AI score), 14-day stacked area chart for severity trends, category donut chart, top-priority alerts table sorted by AI score.</p>
+    </div>
+  </div>
+
+  <div class="page-item">
+    <div class="page-icon" style="background:#fee2e2">🛡</div>
+    <div>
+      <h3>Alerts <code>/alerts</code></h3>
+      <p>Sortable table with 20 realistic alerts. Filters: severity, category, status, full-text search — all URL-persisted. Columns sort on severity, status, AI score, timestamp. AI score progress bar per row.</p>
+    </div>
+  </div>
+
+  <div class="page-item">
+    <div class="page-icon" style="background:#ede9fe">🤖</div>
+    <div>
+      <h3>Alert Detail <code>/alerts/:id</code></h3>
+      <p>Full metadata panel, <strong>AI Threat Analysis</strong> (0–100 score meter + written rationale), <strong>MITRE ATT&amp;CK</strong> section (colour-coded tactic pills + technique cards with IDs), IoC list (IP/domain/hash/URL/email), in-place status update via API.</p>
+    </div>
+  </div>
+
+  <div class="page-item">
+    <div class="page-icon" style="background:#ffedd5">🚨</div>
+    <div>
+      <h3>Incidents <code>/incidents</code> &amp; <code>/incidents/:id</code></h3>
+      <p>Incident card list. Detail view shows chronological <strong>investigative timeline</strong>, linked alerts with AI scores, metadata (assignee, created date, alert count).</p>
+    </div>
+  </div>
+
+  <div class="page-item">
+    <div class="page-icon" style="background:#d1fae5">🔗</div>
+    <div>
+      <h3>MITRE ATT&amp;CK Matrix <code>/mitre</code></h3>
+      <p>Interactive <strong>heatmap</strong> — tactic columns × technique rows, colour-coded by alert hit count (not seen → 1 → 2 → 3–4 → 5+). Hover tooltip with detail. Click technique → navigate to filtered alerts view. Per-tactic breakdown grid below the heatmap.</p>
+    </div>
+  </div>
+
+  <div class="page-item">
+    <div class="page-icon" style="background:#f0fdf4">📈</div>
+    <div>
+      <h3>Analytics <code>/analytics</code></h3>
+      <p>Severity trend + category donut, <strong>alerts by detection source</strong> horizontal bar chart, <strong>AI score distribution</strong> histogram (4 priority buckets), category × severity cross-tab table with per-category average AI scores.</p>
+    </div>
+  </div>
+
+  
+  <h2>Shared UI Components</h2>
+  <div class="grid3">
+    <div class="card">
+      <div class="card-title">SeverityBadge</div>
+      <p>Colour-coded pill with dot indicator for critical / high / medium / low / info.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">StatusBadge</div>
+      <p>Pill for open / investigating / resolved / false-positive.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">AiScoreMeter</div>
+      <p>0–100 score with progress bar, score label, priority tier. Compact (number-only) variant for tables.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">SeverityTrendChart</div>
+      <p>14-day stacked area chart (Recharts) with gradient fills per severity level.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">CategoryDonutChart</div>
+      <p>Recharts PieChart with inner radius showing alert distribution by category.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">MitreHeatmap</div>
+      <p>Scrollable CSS grid heatmap with hover tooltips and click-through navigation.</p>
+    </div>
+  </div>
+
+  
+  <h2>Backend API</h2>
+  <table>
+    <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+    <tr><td class="route-method get">GET</td><td class="path">/api/alerts</td><td>List with ?severity, ?category, ?status, ?search, ?sort, ?order</td></tr>
+    <tr><td class="route-method get">GET</td><td class="path">/api/alerts/:id</td><td>Single alert</td></tr>
+    <tr><td class="route-method patch">PATCH</td><td class="path">/api/alerts/:id/status</td><td>Update status in-memory</td></tr>
+    <tr><td class="route-method get">GET</td><td class="path">/api/incidents</td><td>Incident list with alertCount</td></tr>
+    <tr><td class="route-method get">GET</td><td class="path">/api/incidents/:id</td><td>Incident + embedded linked alerts</td></tr>
+    <tr><td class="route-method get">GET</td><td class="path">/api/stats/summary</td><td>KPI metrics</td></tr>
+    <tr><td class="route-method get">GET</td><td class="path">/api/stats/trends</td><td>14-day severity trend array</td></tr>
+    <tr><td class="route-method get">GET</td><td class="path">/api/stats/categories</td><td>Alert count by category</td></tr>
+    <tr><td class="route-method get">GET</td><td class="path">/api/mitre/matrix</td><td>MITRE tactics × techniques with hit counts</td></tr>
+  </table>
+
+  
+  <h2>Seed Data</h2>
+  <div class="section-note">20 high-fidelity alerts and 3 incidents — all with relative timestamps so the dashboard always shows "recent" activity.</div>
+  <div class="grid2">
+    <div>
+      <p><strong>Alerts include:</strong> Emotet malware, spear-phishing, SSH brute force, PowerShell obfuscation, DNS tunnelling exfiltration, ransomware file encryption, Pass-the-Hash lateral movement, CVE exploit privilege escalation, DDoS, OAuth abuse, credential stuffing, insider mass download, cron persistence, cryptomining, Kerberoasting, supply chain npm compromise, SQL injection probing, S3 bucket misconfiguration, and more.</p>
+    </div>
+    <div>
+      <p><strong>Coverage:</strong> Every alert has AI score (0–100), plain-language AI rationale, MITRE tactic and technique tags (30+ unique techniques across 14 tactics), indicators of compromise (IPs, domains, file hashes, emails, URLs), and source system attribution.</p>
+    </div>
+  </div>
+
+  
+  <h2>Tech Stack</h2>
+  <div class="stack-row"><span class="stack-label">Frontend</span><span>React 18 · TypeScript · Vite · React Router v6 · Recharts · Tailwind CSS · Lucide React</span></div>
+  <div class="stack-row"><span class="stack-label">Backend</span><span>Node.js · Express 4 · TypeScript · tsx (watch mode)</span></div>
+  <div class="stack-row"><span class="stack-label">Data</span><span>In-memory seed (no external DB required)</span></div>
+
+  
+  <h2>How to Run</h2>
+  <div class="cmd-block">
+<span class="cmd-comment"># Terminal 1 — backend (port 3001)</span>
+cd backend &amp;&amp; npm install &amp;&amp; npm run dev
+
+<span class="cmd-comment"># Terminal 2 — frontend (port 5173)</span>
+cd frontend &amp;&amp; npm install &amp;&amp; npm run dev
+  </div>
+  <p>Vite proxies <code>/api/*</code> to <code>localhost:3001</code> automatically — no CORS configuration needed in development.</p>
+
+  <div class="footer">Made with IBM Bob</div>
+</div>
+<script type="module" src="/src/main.tsx"></script>
+</body>
+</html>
