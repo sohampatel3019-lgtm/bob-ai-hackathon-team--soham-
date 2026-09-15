@@ -1,1 +1,26 @@
+/**
+ * Shared badge utility for severity and status styling.
+ * Used by IncidentTable, Incidents page, Alerts page, and IncidentDetail.
+ */
+
+export const SEVERITY_BADGE: Record<string, string> = {
+  Critical: 'bg-red-500/20 text-red-400 border border-red-500/30',
+  High:     'bg-orange-500/20 text-orange-400 border border-orange-500/30',
+  Medium:   'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30',
+  Low:      'bg-green-500/20 text-green-400 border border-green-500/30',
+}
+
+export const STATUS_BADGE: Record<string, string> = {
+  NEW:           'bg-slate-600/40 text-slate-300 border border-slate-600',
+  INVESTIGATING: 'bg-blue-600/30 text-blue-300 border border-blue-600/40',
+  RESOLVED:      'bg-green-700/30 text-green-300 border border-green-700/40',
+}
+
+export function severityBadgeClass(severity: string): string {
+  return SEVERITY_BADGE[severity] ?? 'bg-slate-600/40 text-slate-300 border border-slate-600'
+}
+
+export function statusBadgeClass(status: string): string {
+  return STATUS_BADGE[status] ?? 'bg-slate-600/40 text-slate-300 border border-slate-600'
+}
 
